@@ -1,0 +1,373 @@
+/* ==========================================================
+   extras.css - efectos llamativos (se carga después de style.css)
+   ========================================================== */
+
+/* Barra de progreso de lectura */
+.progreso-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    width: 100%;
+    height: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--azul), var(--oro), var(--elixir));
+    pointer-events: none;
+}
+
+/* Revelado al hacer scroll */
+.revelar {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--retraso, 0s);
+}
+
+.revelar.visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Brillo dorado que sigue al mouse en las cartas */
+.card-heroe {
+    position: relative;
+}
+
+.card-tropas::after,
+.card-heroe::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--bx, 50%) var(--by, 50%),
+        rgba(255, 255, 255, 0.22),
+        rgba(212, 169, 55, 0.14) 35%,
+        transparent 62%
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    content: "";
+}
+
+.card-tropas.tilt-activa::after,
+.card-heroe.tilt-activa::after {
+    opacity: 1;
+}
+
+.card-tropas.tilt-activa,
+.card-heroe.tilt-activa {
+    border-color: var(--oro);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Partículas de elixir en la sección del video */
+.particulas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Confeti al abrir el cofre */
+.confeti-lienzo {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Simulador de elixir */
+.elixir-section {
+    padding: var(--pad-seccion) 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--noche);
+}
+
+.elixir-panel {
+    padding: 28px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+}
+
+.elixir-barra {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+}
+
+.elixir-seg {
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    border: 1px solid #3b2b5c;
+    border-radius: 5px;
+    background: #241a3a;
+}
+
+.elixir-seg::before {
+    position: absolute;
+    inset: 0;
+    transform: scaleX(var(--f, 0));
+    transform-origin: left;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--elixir), #c28aff);
+    box-shadow: 0 0 12px rgba(142, 91, 214, 0.55);
+    content: "";
+}
+
+.elixir-estado {
+    margin: 12px 0 22px;
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+}
+
+.elixir-estado strong {
+    color: #c9a2f5;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+}
+
+.elixir-mano {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px;
+}
+
+.elixir-carta {
+    position: relative;
+    padding: 16px 10px 10px;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    background: var(--noche-2);
+    color: var(--texto);
+    font: inherit;
+    font-size: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.elixir-carta:hover:not(.bloqueada) {
+    transform: translateY(-4px);
+    border-color: var(--oro);
+}
+
+.elixir-carta img {
+    display: block;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 8px;
+    object-fit: contain;
+}
+
+.elixir-costo {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    display: flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--noche);
+    border-radius: 50%;
+    background: var(--elixir);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.elixir-carta.bloqueada {
+    opacity: 0.45;
+}
+
+.elixir-carta.jugada {
+    animation: carta-desplegada 0.45s ease;
+}
+
+.elixir-carta.sin-elixir {
+    animation: carta-sin-elixir 0.35s ease;
+}
+
+@keyframes carta-desplegada {
+    0% { transform: scale(1); }
+    40% {
+        transform: scale(1.08) translateY(-8px);
+        box-shadow: 0 0 24px rgba(212, 169, 55, 0.7);
+    }
+    100% { transform: scale(1); }
+}
+
+@keyframes carta-sin-elixir {
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.elixir-controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.elixir-doble {
+    padding: 8px 18px;
+    border: 1px solid var(--oro);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--oro-claro);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.elixir-doble[aria-pressed="true"] {
+    background: var(--oro);
+    color: var(--noche);
+}
+
+.elixir-mensaje {
+    min-height: 1.6em;
+    color: var(--texto-suave);
+}
+
+/* Navegación flotante y acceso rápido al inicio */
+.menu-flotante {
+    position: fixed;
+    top: 50%;
+    right: 18px;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.menu-flotante.visible {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.menu-punto {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 2px solid var(--oro);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-punto:hover,
+.menu-punto.activo {
+    background: var(--oro);
+}
+
+.menu-punto.activo {
+    transform: scale(1.25);
+}
+
+.menu-punto::after {
+    position: absolute;
+    top: 50%;
+    right: 26px;
+    padding: 4px 10px;
+    transform: translateY(-50%);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: var(--panel);
+    color: var(--texto);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    content: attr(data-etiqueta);
+}
+
+.menu-punto:hover::after,
+.menu-punto:focus-visible::after {
+    opacity: 1;
+}
+
+.volver-arriba {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 900;
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--oro);
+    border-radius: 50%;
+    background: var(--panel);
+    color: var(--oro-claro);
+    font-size: 1.3rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease,
+        background-color 0.2s ease, color 0.2s ease;
+}
+
+.volver-arriba.visible {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.volver-arriba:hover {
+    background: var(--oro);
+    color: var(--noche);
+}
+
+@media (max-width: 700px) {
+    .menu-flotante {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .revelar {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .elixir-carta,
+    .elixir-carta.jugada,
+    .elixir-carta.sin-elixir {
+        animation: none;
+        transition: none;
+    }
+
+    .menu-flotante,
+    .volver-arriba,
+    .menu-punto::after {
+        transition: none;
+    }
+}

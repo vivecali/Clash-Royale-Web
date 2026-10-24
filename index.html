@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' https:; connect-src 'self' https: http://localhost:5000; script-src 'self' 'unsafe-inline' https: https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https: https://fonts.googleapis.com https://kit.fontawesome.com; img-src 'self' data: https:; font-src 'self' data: https: https://fonts.gstatic.com https://ka-f.fontawesome.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self' https:">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Clash Royale - La Historia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./extras.css">
+    <link rel="stylesheet" href="./rendimiento.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" as="image" href="portada.jpg">
+
+    <!-- Librería de animación -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body class="is-loading">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">Cargando la Arena de Clash Royale...</div>
+    </div>
+
+    <!-- ESCENA 1: Portada Interactiva (Personaje y Portal) -->
+    <section id="portada-juego" class="portada-container">
+        <header class="bienvenida">
+            <h1>Bienvenido a la historia de Clash Royale</h1>
+        </header>
+
+        <div class="escenario">
+            <!-- Portal mágico MÁGICO -->
+            <div id="portal" class="portal">
+                <div class="portal-brillo"></div>
+            </div>
+
+            <!-- Personaje que mueves con el mouse -->
+            <div id="personaje" class="personaje" aria-label="Héroe con capa">
+                <span class="personaje-capa" aria-hidden="true"></span>
+                <span class="personaje-pierna personaje-pierna-izquierda" aria-hidden="true"></span>
+                <span class="personaje-pierna personaje-pierna-derecha" aria-hidden="true"></span>
+                <span class="personaje-brazo personaje-brazo-izquierdo" aria-hidden="true"></span>
+                <span class="personaje-brazo personaje-brazo-derecho" aria-hidden="true"></span>
+                <span class="personaje-cuerpo" aria-hidden="true"></span>
+                <span class="personaje-cabeza" aria-hidden="true"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESCENA 2: Sección del Video de la Historia (Aparece al cruzar el portal) -->
+    <main id="seccion-web" class="web-oculta">
+        <section class="video-section">
+            <div class="arena-emblemas" aria-hidden="true">
+                <span class="emblema-espada">⚔️</span>
+                <span class="emblema-escudo">🛡️</span>
+                <span class="emblema-escudo">🛡️</span>
+                <span class="emblema-espada">⚔️</span>
+                <span class="emblema-espada">⚔️</span>
+                <span class="emblema-escudo">🛡️</span>
+            </div>
+            <h1 class="titulo-video">Más que un Juego, una Leyenda: La Travesía Global de Clash Royale ⚔️💥</h1>
+            <video id="video" controls playsinline preload="metadata"></video>
+            <p class="frase-video">Detrás de cada victoria en la arena, hay batallas que dejaron cicatrices...</p>
+        </section>
+
+        <section class="historia-section">
+            <div class="section-content">
+                <h2>El Origen de la Leyenda (2016)</h2>
+                <div class="timeline">
+                    <article class="timeline-card">
+                        <span class="year">2016</span>
+                        <h3>Lanzamiento Mundial</h3>
+                        <p>Supercell lanza Clash Royale combinando cartas coleccionables, defensa de torres y batallas multijugador en tiempo real.</p>
+                    </article>
+                    <article class="timeline-card">
+                        <span class="year">2017 - 2018</span>
+                        <h3>Evolución Competitiva</h3>
+                        <p>Llegan las ligas eSports, la Crown League y nuevas cartas legendarias que cambiaron las estrategias en la arena.</p>
+                    </article>
+                    <article class="timeline-card">
+                        <span class="year">Presente</span>
+                        <h3>El Legado</h3>
+                        <p>Evoluciones de tropas, pases de batalla y millones de jugadores compitiendo diariamente.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cartas-section">
+            <div class="section-content">
+                <h2>Cartas Icónicas</h2>
+                <div class="grid-cartas">
+                    <article class="card-tropas">
+                        <div class="badge">6</div>
+                        <h3>P.E.K.K.A</h3>
+                        <p>Armadura pesada y gran daño cuerpo a cuerpo.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">4</div>
+                        <h3>Montapuercos</h3>
+                        <p>Veloz y enfocado en destruir las torres enemigas.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">4</div>
+                        <h3>Mago Eléctrico</h3>
+                        <p>Aparece con un rayo aturdidor y frena tropas rivales.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="historia-profunda-section">
+            <div class="section-content">
+                <h2>Origen, Historia y Fenómeno Global</h2>
+                <article class="historia-bloque">
+                    <div class="historia-texto">
+                        <h3>2016: El Nacimiento en Helsinki</h3>
+                        <p>Concebido por Supercell en Finlandia, Clash Royale nació de la idea de combinar las batallas estratégicas en tiempo real tipo MOBA con la recolección de cartas físicas y la ambientación del universo Clash. Lanzado globalmente en marzo de 2016, alcanzó rápidamente una enorme comunidad gracias a sus partidas dinámicas de tres minutos.</p>
+                    </div>
+                    <div class="historia-img-wrapper">
+                        <img src="./imagenes/historia-lanzamiento.jpg" alt="Lanzamiento global de Clash Royale en 2016" loading="lazy">
+                    </div>
+                </article>
+
+                <article class="historia-bloque reverse">
+                    <div class="historia-texto">
+                        <h3>De Juego Móvil a Fenómeno eSports</h3>
+                        <p>Su éxito no se detuvo en el público casual: con la creación de la Clash Royale League (CRL), el título se consolidó como uno de los pilares de los eSports en dispositivos móviles. Llegó a escenarios internacionales en Asia, Europa y América, otorgando premios importantes y convirtiéndose en un referente cultural del gaming.</p>
+                    </div>
+                    <div class="historia-img-wrapper">
+                        <img src="./imagenes/historia-hit.jpg" alt="Escenario de la Clash Royale League" loading="lazy">
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cartas-section cartas-origen-section">
+            <div class="section-content">
+                <h2>Cartas Icónicas y Origen</h2>
+                <div class="grid-cartas">
+                    <article class="card-tropas">
+                        <div class="badge">7</div>
+                        <img src="./imagenes/carta-pekka.jpg" alt="Carta de P.E.K.K.A" class="img-carta" loading="lazy">
+                        <h3>P.E.K.K.A</h3>
+                        <p><strong>Origen:</strong> Proviene de Clash of Clans. Es una pesada armadura robótica temida por su devastador daño cuerpo a cuerpo contra tanques y torres.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">4</div>
+                        <img src="./imagenes/carta-montapuercos.jpg" alt="Carta de Montapuercos" class="img-carta" loading="lazy">
+                        <h3>Montapuercos</h3>
+                        <p><strong>Origen:</strong> Icono absoluto de Supercell. Salta el río directo a las estructuras enemigas y es la base de los mazos de ciclo rápido (Fast Cycle).</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">4</div>
+                        <img src="./imagenes/carta-mago-electrico.jpg" alt="Carta de Mago Eléctrico" class="img-carta" loading="lazy">
+                        <h3>Mago Eléctrico</h3>
+                        <p><strong>Origen:</strong> Creado para refrescar el meta. Cae a la arena lanzando una descarga y aturde a dos objetivos simultáneamente, frenando a Chispitas y Torres Infernales.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">6</div>
+                        <img src="./imagenes/carta-gigante-noble.jpg" alt="Carta de Gigante Noble" class="img-carta" loading="lazy">
+                        <h3>Gigante Noble</h3>
+                        <p><strong>Origen:</strong> Variante a distancia del Gigante tradicional. Armado con un cañón, dispara a las estructuras enemigas desde una distancia segura.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">6</div>
+                        <img src="./imagenes/carta-chispitas.jpg" alt="Carta de Chispitas" class="img-carta" loading="lazy">
+                        <h3>Chispitas</h3>
+                        <p><strong>Origen:</strong> Máquina electromagnética introducida en las primeras arenas legendarias. Posee el mayor daño por disparo único de todo el juego.</p>
+                    </article>
+                    <article class="card-tropas">
+                        <div class="badge">2</div>
+                        <img src="./imagenes/carta-tronco.jpg" alt="Carta de El Tronco" class="img-carta" loading="lazy">
+                        <h3>El Tronco</h3>
+                        <p><strong>Origen:</strong> Hechizo legendario nacido de una botella de furia derramada sobre un tronco. Esencial para empujar y barrer tropas terrestres de bajo coste.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="evoluciones-section">
+            <div class="section-content">
+                <h2>Campeones y Evoluciones</h2>
+                <p class="subtitulo-sec">Mecánicas avanzadas que transformaron el metajuego estratégico</p>
+                <div class="grid-heroes">
+                    <article class="card-heroe campeon-card">
+                        <img src="./imagenes/heroe-caballero-dorado.jpg" alt="Caballero Dorado" loading="lazy">
+                        <div class="card-heroe-info">
+                            <h3>Caballero Dorado</h3>
+                            <span class="tag-categoria heroe">Campeón</span>
+                            <p><strong>Carga Temeraria:</strong> Activa una embestida en cadena que se desliza velozmente eliminando tropas agrupadas.</p>
+                        </div>
+                    </article>
+                    <article class="card-heroe campeon-card">
+                        <img src="./imagenes/heroe-reina-arquera.jpg" alt="Reina Arquera" loading="lazy">
+                        <div class="card-heroe-info">
+                            <h3>Reina Arquera</h3>
+                            <span class="tag-categoria heroe">Campeón</span>
+                            <p><strong>Manto de Invisibilidad:</strong> Se vuelve invisible para las defensas enemigas mientras aumenta drásticamente su velocidad de disparo.</p>
+                        </div>
+                    </article>
+                    <article class="card-heroe evolucion-card">
+                        <img src="./imagenes/evolucion-lanzafuegos.jpg" alt="Lanzafuegos Evolucionada" loading="lazy">
+                        <div class="card-heroe-info">
+                            <h3>Lanzafuegos Evo</h3>
+                            <span class="tag-categoria evo">Evolución</span>
+                            <p><strong>Cohetes de Veneno:</strong> Sus impactos dejan áreas con daño continuo en el suelo, desgastando tropas y estructuras.</p>
+                        </div>
+                    </article>
+                    <article class="card-heroe evolucion-card">
+                        <img src="./imagenes/evolucion-caballero.jpg" alt="Caballero Evolucionado" loading="lazy">
+                        <div class="card-heroe-info">
+                            <h3>Caballero Evo</h3>
+                            <span class="tag-categoria evo">Evolución</span>
+                            <p><strong>Escudo Implacable:</strong> Reduce enormemente el daño recibido mientras camina, convirtiéndose en un tanque terrestre eficiente.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="leyendas-section">
+            <div class="section-content">
+                <h2>Leyendas de la Comunidad y eSports</h2>
+                <div class="grid-jugadores">
+                    <article class="card-jugador">
+                        <img src="./imagenes/jugador-beniju.jpg" alt="Beniju" loading="lazy">
+                        <div class="jugador-info">
+                            <h3>Beniju</h3>
+                            <span class="tag-creador">Creador y Pro Player</span>
+                            <p>Icono indiscutible de la comunidad hispanohablante. Exjugador profesional y creador de contenido, caracterizado por su análisis táctico y versatilidad con mazos de control.</p>
+                        </div>
+                    </article>
+                    <article class="card-jugador">
+                        <img src="./imagenes/jugador-mohamed-light.jpg" alt="Mohamed Light" loading="lazy">
+                        <div class="jugador-info">
+                            <h3>Mohamed Light</h3>
+                            <span class="tag-campeon">Campeón Mundial CRL</span>
+                            <p>El jugador egipcio es considerado uno de los competidores más dominantes en la historia del juego, sumando múltiples títulos globales y dominando los rankings de ladder temporada tras temporada.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cofres-gemas-section">
+            <div class="section-content">
+                <h2>Tesoros de la Arena</h2>
+                <div class="cofres-gemas-grid">
+                    <article class="tesoro-panel cofres-panel">
+                        <h3>Tipos de cofres</h3>
+                        <p>Hay alrededor de 15 a 18 tipos, según el modo de obtención, la tienda y los eventos.</p>
+                        <ul class="lista-cofres">
+                            <li><strong>Ciclo de victorias:</strong> Plata, Oro, Mágico, Gigante, Comodín Real y Megarelámpago.</li>
+                            <li><strong>Especiales y de tienda:</strong> Épico, Legendario, Relámpago, del Rey, del Rey Legendario y Cofres de la Suerte.</li>
+                            <li><strong>Eventos y progresión:</strong> Madera, de coronas y cofres o cajas del Pass Royale y eventos de temporada.</li>
+                        </ul>
+                    </article>
+
+                    <article class="tesoro-panel gemas-panel">
+                        <h3>Gemas</h3>
+                        <p>El recurso brillante de la arena, disponible desde el inicio de cada cuenta.</p>
+                        <div class="gemas-contadores">
+                            <div class="gema-contador">
+                                <strong>100</strong>
+                                <span>gemas iniciales</span>
+                            </div>
+                            <div class="gema-contador total-gemas">
+                                <strong>5 M+</strong>
+                                <span>gemas en total</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="emotes-section">
+            <div class="section-content emotes-layout">
+                <div class="emotes-texto">
+                    <span class="emotes-cantidad">650+</span>
+                    <h2>Emotes para cada batalla</h2>
+                    <p>Clash Royale cuenta con más de 650 emotes o reacciones. El catálogo crece continuamente con cada nueva temporada, pase de batalla y evento especial.</p>
+                </div>
+                <figure class="emotes-visual">
+                    <button class="emote-rey-boton" id="emote-rey-boton" type="button" aria-label="Reproducir el sonido del Rey riendo">
+                        <img src="./imagenes/emote-rey-riendo.png" alt="Emote del Rey riendo" loading="lazy">
+                    </button>
+                    <figcaption id="emote-rey-estado" aria-live="polite">Toca la imagen para escuchar la risa del Rey.</figcaption>
+                </figure>
+                <audio id="sonido-emote-rey" src="https://www.myinstants.com/media/sounds/hi-hi-hi-ha-clash-royale.mp3" preload="none"></audio>
+            </div>
+        </section>
+
+        <section class="cofre-sorpresa-section">
+            <div class="section-content cofre-sorpresa-content">
+                <h2>FELICIDADES ESTE COFRE ES PARA TI :)</h2>
+                <p class="cofre-intro">Tu recompensa especial de la arena te está esperando.</p>
+                <button class="cofre-boton" id="cofre-boton" type="button" aria-expanded="false" aria-controls="cofre-recompensa">
+                    <span class="cofre-tapa" aria-hidden="true"></span>
+                    <span class="cofre-cuerpo" aria-hidden="true"></span>
+                    <span class="cofre-cerradura" aria-hidden="true"></span>
+                    <span class="cofre-boton-texto">Toca para abrir</span>
+                </button>
+                <div class="cofre-recompensa" id="cofre-recompensa" hidden>
+                    <button class="emote-recompensa" id="emote-recompensa" type="button" aria-label="Reproducir el sonido del emote">
+                        <img src="./imagenes/emote-duende-llorando.png" alt="Emote del duende llorando" loading="lazy">
+                    </button>
+                    <p>¡El duende tiene algo que decirte!</p>
+                </div>
+                <audio id="sonido-cofre" src="sonido-duende-llorando.mp3" preload="none"></audio>
+            </div>
+        </section>
+    </main>
+
+    <script defer src="script.js"></script>
+    <script defer src="extras.js"></script>
+</body>
+</html>

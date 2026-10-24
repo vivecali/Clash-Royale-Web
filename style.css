@@ -1,0 +1,1060 @@
+/* ==========================================================
+   Clash Royale - La Historia
+   Estilo profesional: azul noche, oro como acento, títulos
+   en serif y texto en sans. Mismas clases que el HTML/JS.
+   ========================================================== */
+
+:root {
+    --noche: #0e1726;
+    --noche-2: #0b121f;
+    --panel: #162338;
+    --borde: #2a3c5c;
+    --texto: #eaf0f8;
+    --texto-suave: #a7b5cb;
+    --oro: #d4a937;
+    --oro-claro: #ecd078;
+    --azul: #4a90d9;
+    --azul-claro: #86b8ee;
+    --elixir: #8e5bd6;
+    --esmeralda: #5fd0a8;
+    --serif: Georgia, 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    --sans: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    --pad-seccion: clamp(56px, 8vw, 96px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background-color: var(--noche);
+    color: var(--texto);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.is-loading {
+    overflow: hidden;
+    height: 100vh;
+}
+
+:focus-visible {
+    outline: 3px solid var(--oro);
+    outline-offset: 3px;
+}
+
+/* ---------- Preloader ---------- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: var(--noche);
+    color: var(--oro-claro);
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.preloader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-text {
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+}
+
+.spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(212, 169, 55, 0.2);
+    border-top-color: var(--oro);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Escena 1: portada interactiva ---------- */
+.portada-container {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        linear-gradient(rgba(9, 14, 26, 0.4), rgba(9, 14, 26, 0.4)),
+        url('portada.jpg') no-repeat center center / cover;
+    user-select: none;
+}
+
+.bienvenida {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    z-index: 2;
+    width: min(90%, 760px);
+    padding: 14px 22px;
+    transform: translateX(-50%);
+    border: 1px solid rgba(212, 169, 55, 0.5);
+    border-radius: 10px;
+    background: rgba(9, 14, 26, 0.78);
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+
+.bienvenida h1 {
+    color: var(--oro-claro);
+    font-family: var(--serif);
+    font-size: clamp(1.25rem, 2.6vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.escenario {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 80vh;
+}
+
+/* Portal */
+.portal {
+    position: absolute;
+    top: 40%;
+    right: 100px;
+    width: 130px;
+    height: 220px;
+    transform: translateY(-50%);
+    border: 3px solid rgba(236, 208, 120, 0.85);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(236, 208, 120, 0.55) 0%, #3b6fb6 62%, transparent 100%);
+    box-shadow: 0 0 34px rgba(74, 144, 217, 0.75), inset 0 0 20px rgba(59, 111, 182, 0.9);
+    animation: pulsar 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes pulsar {
+    0% {
+        transform: translateY(-50%) scale(0.96);
+        box-shadow: 0 0 22px rgba(74, 144, 217, 0.55), inset 0 0 20px rgba(59, 111, 182, 0.9);
+    }
+    100% {
+        transform: translateY(-50%) scale(1.04);
+        box-shadow: 0 0 46px rgba(134, 184, 238, 0.85), inset 0 0 20px rgba(59, 111, 182, 0.9);
+    }
+}
+
+/* Personaje */
+.personaje {
+    position: absolute;
+    top: 50%;
+    left: 80px;
+    z-index: 10;
+    width: 88px;
+    height: 132px;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.55));
+    touch-action: none;
+}
+
+.personaje:active {
+    cursor: grabbing;
+}
+
+.personaje-capa,
+.personaje-cabeza,
+.personaje-cuerpo,
+.personaje-brazo,
+.personaje-pierna {
+    position: absolute;
+}
+
+.personaje-capa {
+    top: 39px;
+    left: 6px;
+    width: 76px;
+    height: 86px;
+    background: linear-gradient(120deg, #e64b3c, #8e1f2d 72%);
+    clip-path: polygon(24% 0, 76% 0, 100% 88%, 50% 72%, 0 88%);
+}
+
+.personaje-cabeza {
+    top: 7px;
+    left: 28px;
+    z-index: 4;
+    width: 34px;
+    height: 37px;
+    border: 3px solid #573723;
+    border-radius: 48% 48% 44% 44%;
+    background: linear-gradient(145deg, #f5cf91 0 54%, #c88852 55%);
+}
+
+.personaje-cabeza::before {
+    position: absolute;
+    top: -5px;
+    left: -3px;
+    width: 34px;
+    height: 15px;
+    border: 2px solid #f7d36c;
+    border-radius: 50% 50% 20% 20%;
+    background: #315c9b;
+    content: "";
+}
+
+.personaje-cuerpo {
+    top: 42px;
+    left: 23px;
+    z-index: 3;
+    width: 42px;
+    height: 47px;
+    border: 3px solid #f7d36c;
+    border-radius: 13px 13px 8px 8px;
+    background: linear-gradient(135deg, #4d8bc4, #214675);
+}
+
+.personaje-brazo {
+    top: 48px;
+    z-index: 2;
+    width: 15px;
+    height: 38px;
+    border: 2px solid #573723;
+    border-radius: 10px;
+    background: #e7b879;
+}
+
+.personaje-brazo-izquierdo {
+    left: 12px;
+    transform: rotate(18deg);
+}
+
+.personaje-brazo-derecho {
+    right: 12px;
+    transform: rotate(-18deg);
+}
+
+.personaje-pierna {
+    top: 83px;
+    z-index: 2;
+    width: 15px;
+    height: 34px;
+    border: 2px solid #30243a;
+    border-radius: 5px 5px 8px 8px;
+    background: #4b3657;
+}
+
+.personaje-pierna-izquierda {
+    left: 28px;
+    transform: rotate(5deg);
+}
+
+.personaje-pierna-derecha {
+    right: 28px;
+    transform: rotate(-5deg);
+}
+
+/* ---------- Escena 2: web ---------- */
+.web-oculta {
+    display: none;
+}
+
+/* Video */
+.video-section {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 48px 20px;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: var(--noche);
+    background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(74, 144, 217, 0.22), transparent 55%),
+        radial-gradient(ellipse at 50% 110%, rgba(212, 169, 55, 0.14), transparent 50%);
+}
+
+.arena-emblemas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.arena-emblemas span {
+    position: absolute;
+    font-size: 3.2rem;
+    line-height: 1;
+    opacity: 0.12;
+    filter: grayscale(0.5);
+}
+
+.arena-emblemas span:nth-child(1) { top: 16%; left: 9%; transform: rotate(-18deg); }
+.arena-emblemas span:nth-child(2) { top: 19%; right: 10%; transform: rotate(12deg); }
+.arena-emblemas span:nth-child(3) { top: 48%; left: 4%; transform: rotate(-10deg); }
+.arena-emblemas span:nth-child(4) { top: 45%; right: 5%; transform: rotate(18deg); }
+.arena-emblemas span:nth-child(5) { bottom: 13%; left: 13%; transform: rotate(15deg); }
+.arena-emblemas span:nth-child(6) { right: 13%; bottom: 12%; transform: rotate(-14deg); }
+
+.titulo-video {
+    position: relative;
+    z-index: 1;
+    width: min(92%, 1000px);
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.video-section video {
+    position: relative;
+    z-index: 1;
+    width: min(85vw, 1000px);
+    max-height: 70vh;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    border: 1px solid rgba(212, 169, 55, 0.55);
+    border-radius: 10px;
+    background: #000;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+.frase-video {
+    position: relative;
+    z-index: 1;
+    width: min(90%, 800px);
+    padding-top: 14px;
+    border-top: 1px solid rgba(212, 169, 55, 0.5);
+    color: var(--texto-suave);
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.hola {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    padding: 28px 44px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(212, 169, 55, 0.5);
+    border-radius: 12px;
+    background: rgba(9, 14, 26, 0.88);
+    backdrop-filter: blur(6px);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hola h1 {
+    color: var(--oro-claro);
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.hola p {
+    color: var(--texto);
+    font-size: 1.15rem;
+}
+
+/* ---------- Secciones: estructura común ---------- */
+.historia-section,
+.cartas-section,
+.historia-profunda-section,
+.evoluciones-section,
+.leyendas-section,
+.cofres-gemas-section,
+.emotes-section,
+.cofre-sorpresa-section {
+    padding: var(--pad-seccion) 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--noche);
+}
+
+.cartas-section,
+.evoluciones-section,
+.cofres-gemas-section,
+.cofre-sorpresa-section {
+    background: var(--noche-2);
+}
+
+.section-content {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+}
+
+.section-content h2 {
+    margin-bottom: 32px;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.subtitulo-sec {
+    max-width: 62ch;
+    margin: -16px 0 32px;
+    color: var(--texto-suave);
+    font-size: 1.05rem;
+    line-height: 1.55;
+}
+
+/* Línea de tiempo */
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.timeline-card {
+    padding: 24px;
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--oro);
+    border-radius: 10px;
+    background: var(--panel);
+    text-align: left;
+}
+
+.timeline-card .year {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--oro);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.timeline-card h3 {
+    margin-bottom: 8px;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
+
+.timeline-card p {
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+}
+
+/* Cartas */
+.grid-cartas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+}
+
+.card-tropas {
+    position: relative;
+    padding: 28px 18px 20px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.25s ease;
+}
+
+.card-tropas,
+.card-heroe {
+    transform-style: preserve-3d;
+}
+
+.card-tropas .badge {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    z-index: 2;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--noche);
+    border-radius: 50%;
+    background: var(--elixir);
+    color: #fff;
+    font-weight: 700;
+}
+
+.card-tropas h3 {
+    margin-bottom: 8px;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+}
+
+.card-tropas p {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.card-tropas p strong {
+    color: var(--oro-claro);
+}
+
+.img-carta {
+    display: block;
+    width: 100%;
+    height: 150px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* Historia detallada */
+.historia-bloque {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 28px;
+    padding: 28px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+}
+
+.historia-bloque.reverse {
+    flex-direction: row-reverse;
+}
+
+.historia-texto h3 {
+    margin-bottom: 10px;
+    color: var(--azul-claro);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    line-height: 1.25;
+}
+
+.historia-texto p {
+    max-width: 62ch;
+    color: var(--texto-suave);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.historia-img-wrapper {
+    flex: 0 0 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #202b35;
+}
+
+.historia-img-wrapper img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Campeones y evoluciones */
+.grid-heroes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 22px;
+}
+
+.card-heroe {
+    position: relative;
+    padding: 16px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+}
+
+.card-heroe > img {
+    display: block;
+    width: 100%;
+    height: 160px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.card-heroe h3,
+.jugador-info h3 {
+    margin-bottom: 6px;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+}
+
+.card-heroe p {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.card-heroe p strong {
+    color: var(--texto);
+}
+
+.evolucion-card {
+    border-color: var(--elixir);
+}
+
+.campeon-card {
+    border: 2px solid var(--oro);
+    box-shadow: 0 0 18px rgba(212, 169, 55, 0.12);
+}
+
+.tag-categoria,
+.tag-creador,
+.tag-campeon {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.tag-categoria.heroe,
+.tag-creador {
+    background: var(--oro);
+    color: var(--noche);
+}
+
+.tag-categoria.evo {
+    background: var(--elixir);
+    color: #fff;
+}
+
+.tag-campeon {
+    background: var(--azul);
+    color: var(--noche);
+}
+
+/* Leyendas */
+.grid-jugadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 24px;
+}
+
+.card-jugador {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+}
+
+.card-jugador > img {
+    flex: 0 0 170px;
+    width: 170px;
+    height: 210px;
+    object-fit: cover;
+}
+
+.jugador-info {
+    padding: 20px 22px;
+}
+
+.jugador-info p {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+/* Cofres y gemas */
+.cofres-gemas-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 24px;
+}
+
+.tesoro-panel {
+    padding: 26px;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--panel);
+}
+
+.tesoro-panel h3 {
+    margin-bottom: 12px;
+    color: var(--texto);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+}
+
+.tesoro-panel > p,
+.emotes-texto > p {
+    color: var(--texto-suave);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.lista-cofres {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+    list-style: none;
+}
+
+.lista-cofres li {
+    padding-left: 14px;
+    border-left: 3px solid var(--oro);
+    color: var(--texto-suave);
+    line-height: 1.55;
+}
+
+.lista-cofres strong {
+    color: var(--texto);
+}
+
+.gemas-panel {
+    border-color: rgba(95, 208, 168, 0.5);
+}
+
+.gemas-contadores {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.gema-contador {
+    display: flex;
+    min-width: 0;
+    min-height: 112px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    background: #12302c;
+    text-align: center;
+}
+
+.gema-contador strong {
+    color: var(--esmeralda);
+    font-family: var(--serif);
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.gema-contador span {
+    color: #d2e8df;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+/* Emotes */
+.emotes-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+    align-items: center;
+    gap: 40px;
+}
+
+.emotes-cantidad {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--oro);
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.emotes-visual {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: #f3f6fb;
+    text-align: center;
+}
+
+.emotes-visual img {
+    display: block;
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+}
+
+.emote-rey-boton {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.emote-rey-boton:focus-visible {
+    outline-offset: -3px;
+}
+
+.emotes-visual figcaption {
+    padding: 10px;
+    background: var(--panel);
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+}
+
+/* Cofre sorpresa */
+.cofre-sorpresa-section {
+    background:
+        radial-gradient(ellipse at 50% 100%, rgba(142, 91, 214, 0.16), transparent 55%),
+        var(--noche-2);
+    text-align: center;
+}
+
+.cofre-sorpresa-content > h2 {
+    width: min(100%, 920px);
+    margin: 0 auto 12px;
+    color: var(--oro-claro);
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cofre-intro {
+    margin-bottom: 8px;
+    color: var(--texto-suave);
+}
+
+.cofre-boton {
+    position: relative;
+    width: min(220px, 75vw);
+    height: 205px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+.cofre-tapa {
+    position: absolute;
+    top: 30px;
+    left: 18px;
+    z-index: 2;
+    width: 184px;
+    height: 74px;
+    border: 4px solid var(--oro);
+    border-radius: 80px 80px 12px 12px;
+    background: linear-gradient(145deg, #b9692c, #713819);
+    box-shadow: inset 0 8px 0 rgba(255, 213, 114, 0.25), 0 8px 14px rgba(0, 0, 0, 0.35);
+    transform-origin: left bottom;
+    transition: transform 0.45s ease;
+}
+
+.cofre-cuerpo {
+    position: absolute;
+    top: 91px;
+    left: 30px;
+    width: 160px;
+    height: 76px;
+    border: 4px solid var(--oro);
+    border-radius: 8px 8px 18px 18px;
+    background: linear-gradient(90deg, #713819 0 18%, #b9692c 18% 82%, #713819 82%);
+    box-shadow: inset 0 8px 0 rgba(255, 213, 114, 0.2), 0 12px 18px rgba(0, 0, 0, 0.4);
+}
+
+.cofre-cuerpo::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 26px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: var(--oro);
+    content: "";
+}
+
+.cofre-cerradura {
+    position: absolute;
+    top: 113px;
+    left: 96px;
+    z-index: 3;
+    width: 28px;
+    height: 32px;
+    border: 3px solid #fff0a6;
+    border-radius: 8px;
+    background: var(--oro);
+}
+
+.cofre-cerradura::after {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    width: 4px;
+    height: 10px;
+    border-radius: 4px;
+    background: #713819;
+    content: "";
+}
+
+.cofre-boton-texto {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: var(--oro-claro);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.cofre-boton.abierto .cofre-tapa {
+    transform: translate(-10px, -26px) rotate(-18deg);
+}
+
+.cofre-recompensa:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    animation: aparecer-recompensa 0.45s ease both;
+}
+
+@keyframes aparecer-recompensa {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.emote-recompensa {
+    width: min(100%, 320px);
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid var(--oro);
+    border-radius: 12px;
+    background: #f3f6fb;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.emote-recompensa:hover {
+    transform: scale(1.03);
+}
+
+.emote-recompensa img {
+    display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+}
+
+.cofre-recompensa > p {
+    color: var(--oro-claro);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 850px) {
+    .historia-bloque {
+        gap: 24px;
+    }
+}
+
+@media (max-width: 700px) {
+    .cofres-gemas-grid,
+    .emotes-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .emotes-layout {
+        gap: 24px;
+    }
+
+    .emotes-visual {
+        width: min(100%, 260px);
+        justify-self: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .bienvenida {
+        top: 16px;
+        padding: 10px 14px;
+    }
+
+    .portal {
+        right: 24px;
+        width: 100px;
+        height: 170px;
+    }
+
+    .video-section video {
+        width: 92vw;
+        max-height: 58vh;
+    }
+
+    .arena-emblemas span {
+        font-size: 2.4rem;
+    }
+
+    .frase-video {
+        font-size: 1rem;
+    }
+
+    .hola {
+        padding: 20px 24px;
+    }
+
+    .historia-bloque,
+    .historia-bloque.reverse {
+        flex-direction: column;
+    }
+
+    .historia-img-wrapper {
+        flex: initial;
+        width: min(100%, 420px);
+    }
+
+    .card-jugador {
+        flex-direction: column;
+    }
+
+    .card-jugador > img {
+        flex-basis: auto;
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portal,
+    .cofre-recompensa:not([hidden]) {
+        animation: none;
+    }
+
+    .cofre-tapa,
+    .emote-recompensa {
+        transition: none;
+    }
+}

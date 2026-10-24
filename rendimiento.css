@@ -1,0 +1,53 @@
+/* ==========================================================
+   rendimiento.css - ajustes para que la página vaya fluida.
+   Se carga DESPUÉS de style.css y extras.css, así que solo
+   sobrescribe lo necesario. No toca el portal ni su posición.
+   (Si algo no te gusta, quita el <link> de este archivo y
+   todo vuelve a como estaba.)
+   ========================================================== */
+
+/* Cartas: sin capas 3D ni mezcla de colores costosa */
+.card-tropas,
+.card-heroe {
+    transform-style: flat;
+}
+
+.card-tropas::after,
+.card-heroe::after {
+    mix-blend-mode: normal;
+}
+
+/* Cartas: una vez reveladas, transiciones cortas y propias.
+   Antes heredaban la transición de 0.7s del "revelar" y la
+   inclinación iba con retraso. */
+.card-tropas:not(.revelar),
+.card-heroe:not(.revelar) {
+    transition: transform 0.35s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-tropas.tilt-activa,
+.card-heroe.tilt-activa {
+    transition: transform 0.08s linear, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Desenfoque de fondo (backdrop-filter): muy costoso, sobre todo
+   sobre el video. Se compensa con un fondo un poco más opaco. */
+.bienvenida {
+    background: rgba(9, 14, 26, 0.9);
+    backdrop-filter: none;
+}
+
+.hola {
+    backdrop-filter: none;
+}
+
+/* La barra de progreso se mueve en su propia capa */
+.progreso-scroll {
+    will-change: transform;
+}
+
+/* Tipografías: títulos en Playfair Display, texto en Inter */
+:root {
+    --serif: 'Playfair Display', Georgia, 'Palatino Linotype', serif;
+    --sans: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
